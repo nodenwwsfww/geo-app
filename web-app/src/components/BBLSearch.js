@@ -1,0 +1,56 @@
+import {useEffect, useState} from "react";
+import PlotInfo from './PlotInfo';
+
+import axios from 'axios';
+
+function BBLSearch() {
+    const [inputValue, setInputValue] = useState('');
+    const [plotInfoModal, setPlotInfoModal] = useState({
+        area: 0,
+        district: 'Las Vegas',
+    });
+
+    const handleInput = (value) => {
+        if (!Number.isSafeInteger(+value) && value !== ' ') return;
+        setInputValue(+value);
+    };
+
+    const handleSearch = async () => {
+        const bbl = +inputValue;
+        if (isNaN(bbl)) return;
+        setInputValue('');
+
+        //const plot = await axios.get(`/plot/${bbl}`);
+        const plot = {
+            area: 22,
+            district: 'Las Vegas',
+
+        };
+        setPlotInfoModal({
+            area: plot.area,
+            district: plot.district,
+        });
+        const modal = document.querySelector('#plot-info');
+        modal.style.display = 'block';
+
+    };
+    return (
+        <>
+            <PlotInfo area={plotInfoModal.area} district={plotInfoModal.district}/>
+            <div className="input-group">
+                <div className="form-outline">
+                    <input type="search" id="form1" className="form-control"
+                           value={inputValue} onChange={({target}) => handleInput(target.value)}/>
+
+                    <label className="form-label" htmlFor="form1">Search by bbl</label>
+                </div>
+                <button type="button" className="btn btn-primary" onClick={handleSearch}>
+                    <i className="fas fa-search"></i>
+                </button>
+            </div>
+        </>
+
+    );
+};
+
+export default BBLSearch;
