@@ -5,6 +5,7 @@ import '../App.css';
 
 import "leaflet/dist/leaflet.css";
 import BBLSearch from "./BBLSearch";
+import MaxMinAreaPlots from "./MaxMinAreaPlots";
 
 function DistrictsMap() {
     const onEachDistrict = (district, layer) => {
@@ -25,8 +26,8 @@ function DistrictsMap() {
     return (
         <div>
             <h1 style={{ textAlign: "center" }}>Map</h1>
-
             <BBLSearch/>
+            <MaxMinAreaPlots/>
             <MapContainer style={{height: '60vh'}} center={[-73.97604935657381,40.631275905646774]} zoom={0} center={[-73, 40]}>
                 <GeoJSON
                     data={districtsData.features}
