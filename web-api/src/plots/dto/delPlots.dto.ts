@@ -1,4 +1,4 @@
-import {Plot} from "../model/plot.entity";
+import {Plot} from "../../model/plot.model";
 
 export class DelPlotsDto {
     plots: Plot[];
