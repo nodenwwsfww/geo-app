@@ -35,7 +35,7 @@ function BBLSearch() {
 
     };
     return (
-        <>
+        <div style={{marginBottom: '15px'}}>
             <PlotInfo area={plotInfoModal.area} district={plotInfoModal.district}/>
             <div className="input-group">
                 <div className="form-outline">
@@ -48,7 +48,7 @@ function BBLSearch() {
                     <i className="fas fa-search"></i>
                 </button>
             </div>
-        </>
+        </div>
 
     );
 };

@@ -2,10 +2,9 @@ import React from 'react';
 import { MapContainer, GeoJSON } from 'react-leaflet';
 import districtsData from '../data/districts.json';
 import '../App.css';
-
 import "leaflet/dist/leaflet.css";
 import BBLSearch from "./BBLSearch";
-import MaxMinAreaPlots from "./MaxMinAreaPlots";
+import AreaBlock from "./AreaBlock/AreaBlock";
 
 function DistrictsMap() {
     const onEachDistrict = (district, layer) => {
@@ -13,22 +12,31 @@ function DistrictsMap() {
         const districtArea = district.properties.shape_area;
         const plotsCount = 0;
 
-        const popup = `
-            Name: ${districtName}
-            Plots count: ${plotsCount}
-            Area: ${districtArea}
+        const popupContent = `
+            <Popup>
+                Name: ${districtName}<br/>
+                Plots count: ${plotsCount}<br/>
+                Area: ${districtArea}
+            </Popup>
         `;
-        layer.bindPopup(districtName);
+
+        layer.bindPopup(popupContent);
 
         layer.options.fillOpacity = Math.random(); //0-1 (0.1, 0.2, 0.3)
 
     };
+
+
     return (
         <div>
-            <h1 style={{ textAlign: "center" }}>Map</h1>
-            <BBLSearch/>
-            <MaxMinAreaPlots/>
-            <MapContainer style={{height: '60vh'}} center={[-73.97604935657381,40.631275905646774]} zoom={0} center={[-73, 40]}>
+            <div className="items-container">
+                <h1 style={{ textAlign: "center" }}>Map</h1>
+                <BBLSearch/>
+                <AreaBlock/>
+            </div>
+
+            <MapContainer style={{height: '80vh'}} zoom={11}
+                          center={[40.66526788720486, -74.05334472656251]}>
                 <GeoJSON
                     data={districtsData.features}
                     onEachFeature={onEachDistrict}
