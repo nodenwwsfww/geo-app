@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-function MaxMinPlotArea(
-    {minPlotArea,maxPlotArea,setMinPlotArea,setMaxPlotArea}
-) {
+function MaxMinPlotArea() {
 
-
+    const [minPlotArea, setMinPlotArea] = useState(1);
+    const [maxPlotArea, setMaxPlotArea] = useState(1000);
     useEffect(() => {
         //
     })
