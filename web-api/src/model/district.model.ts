@@ -8,6 +8,10 @@ export class District extends Model<District> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
+    @ApiProperty({example: '10000', description: "Shape area size"})
+    @Column({type: DataType.INTEGER})
+    area: number;
+
     @ApiProperty({example: '60', description: "Plot's count"})
     @Column({type: DataType.INTEGER})
     plots_count: number;

@@ -2,6 +2,7 @@ import {useState} from "react";
 import PlotInfo from './PlotInfo';
 
 import axios from 'axios';
+import {API_URL} from "../config";
 
 function BBLSearch() {
     const [inputValue, setInputValue] = useState('');
@@ -20,11 +21,12 @@ function BBLSearch() {
         if (isNaN(bbl)) return;
         setInputValue('');
 
-        const plot = await axios.get(serverUrl + `/plots/info`, {
+        const response = await axios.get(API_URL + `/plots/info`, {
             params: {
                 bbl
             }
         });
+        const plot = response.data;
 
         setPlotInfoModal({
             area: plot.area,
@@ -51,6 +53,6 @@ function BBLSearch() {
         </div>
 
     );
-};
+}
 
 export default BBLSearch;

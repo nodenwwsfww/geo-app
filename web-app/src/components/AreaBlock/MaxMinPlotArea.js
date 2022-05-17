@@ -1,18 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-function MaxMinPlotArea({}) {
-    if (!minPlotArea || !maxPlotArea) return;
+import {API_URL} from "../../config";
 
+function MaxMinPlotArea({}) {
     const [minPlotArea, setMinPlotArea] = useState(1);
     const [maxPlotArea, setMaxPlotArea] = useState(1000);
 
-    useEffect(async () => {
-        const dataJson = await axios.get(serverUrl + '/plots/min-max-area');
-        const [minArea, maxArea] = JSON.parse(dataJson);
 
-        setMinPlotArea(minArea);
-        setMaxPlotArea(maxArea);
-    });
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(API_URL + '/plots/min-max-area');
+            const [minArea, maxArea] = response.data;
+
+            setMinPlotArea(minArea);
+            setMaxPlotArea(maxArea);
+        };
+        fetchData();
+
+    }, []);
 
     return (
         <div className="max-min-area-plots">

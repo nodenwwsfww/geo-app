@@ -2,22 +2,23 @@ import {Injectable} from '@nestjs/common';
 import {DelPlotsDto} from "./dto/delPlots.dto";
 import {Plot} from "../model/plot.model";
 import {InjectModel} from "@nestjs/sequelize";
-import {GetPlotInfoDto} from "./dto/getPlotInfo.dto";
 import {IPlotInfo} from "./interfaces/IPlotInfo";
 import {CreatePlotDto} from "./dto/createPlotDto.dto";
 import {QueryTypes} from "sequelize";
+import {GetPlotInfoDto} from "./dto/getPlotInfo.dto";
 
 @Injectable()
 export class PlotsService {
     constructor(
         @InjectModel(Plot)
         private plotsRepository: typeof Plot,
-    ) {}
+    ) {
+    }
 
 
-    async getPlotInfo(dto: GetPlotInfoDto): Promise<IPlotInfo> {
-        const {bbl} = dto;
-        const {area, district} = await this.plotsRepository.findOne({ where: { bbl } });
+    async getPlotInfo(data: GetPlotInfoDto): Promise<IPlotInfo> {
+        const {bbl} = data;
+        const {area, district} = await this.plotsRepository.findOne({where: {bbl}});
 
         return {
             area,

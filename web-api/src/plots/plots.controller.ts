@@ -1,9 +1,9 @@
-import {Body, Controller, Delete, Get, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Post, Query} from '@nestjs/common';
 import {DelPlotsDto} from "./dto/delPlots.dto";
 import {PlotsService} from "./plots.service";
 import {ApiTags} from "@nestjs/swagger";
-import {GetPlotInfoDto} from "./dto/getPlotInfo.dto";
 import {CreatePlotDto} from "./dto/createPlotDto.dto";
+import {GetPlotInfoDto} from "./dto/getPlotInfo.dto";
 
 @ApiTags('Plots')
 @Controller('plots')
@@ -11,8 +11,8 @@ export class PlotsController {
     constructor(private readonly plotsService: PlotsService) {}
 
     @Get('info')
-    getPlotInfo(@Body() dto: GetPlotInfoDto) {
-        return this.plotsService.getPlotInfo(dto);
+    getPlotInfo(@Query() data: GetPlotInfoDto) {
+        return this.plotsService.getPlotInfo(data);
     }
 
     @Get('min-max-area')
