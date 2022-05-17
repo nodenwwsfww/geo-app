@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import PlotInfo from './PlotInfo';
 
 import axios from 'axios';
@@ -20,12 +20,12 @@ function BBLSearch() {
         if (isNaN(bbl)) return;
         setInputValue('');
 
-        //const plot = await axios.get(`/plot/${bbl}`);
-        const plot = {
-            area: 22,
-            district: 'Las Vegas',
+        const plot = await axios.get(serverUrl + `/plots/info`, {
+            params: {
+                bbl
+            }
+        });
 
-        };
         setPlotInfoModal({
             area: plot.area,
             district: plot.district,

@@ -8,7 +8,11 @@ export class District extends Model<District> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
-    @ApiProperty({description: 'Json value'})
-    @Column({type: DataType.JSON, allowNull: false})
-    jsonValue: string;
+    @ApiProperty({example: '60', description: "Plot's count"})
+    @Column({type: DataType.INTEGER})
+    plots_count: number;
+
+    @ApiProperty({description: 'District name'})
+    @Column({type: DataType.STRING, allowNull: false})
+    district: string;
 }

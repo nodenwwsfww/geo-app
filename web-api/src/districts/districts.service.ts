@@ -10,7 +10,9 @@ export class DistrictsService {
     ) {}
 
     async getAllDistricts(): Promise<District[]> {
-        return this.districtsRepository.findAll();
+        const districts = await this.districtsRepository.findAll();
+        return districts;
     }
+
 
 }

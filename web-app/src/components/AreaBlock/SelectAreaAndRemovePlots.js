@@ -1,31 +1,19 @@
 import React, {useState} from 'react';
-function SelectAreaAndRemovePlots({districtsData, setDistrictsData}) {
+import axios from "axios";
+function SelectAreaAndRemovePlots({setDistrictsData}) {
 
     const [minValue, setMinValue] = useState('');
     const [maxValue, setMaxValue] = useState('');
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if(Number.isNaN(minValue) || Number.isNaN(minValue)) return;
-        // api axios. get plots that have area in range (minValue, maxValue),
-        // then get plot.properties.districtName; and then find district by name
+        await axios.post(serverUrl + '/plots/delete', {
+            minValue,
+            maxValue,
+        });
 
-/*        plotsData.filter((plot) => {
-            const area = +plot.properties["shape_area"];
-            if (area >= minValue && area <= maxValue) {
-                const plotDistrict = plot.properties.districtName;
-                const district = districtsData.filter((district) => district.properties.ntaname === plotDistrict)[0];
-                district.properties.plotsCount--;
-            }
-            else return plot;
-        });*/
-
-        const plotDistrict = 'districtName';
-        const district = districtsData.filter((district) => district.properties.ntaname === plotDistrict)[0];
-        district.properties.plotsCount--;
-
-        setDistrictsData(...districtsData);
-
-        //axios to update districts
+        const _districtsData = await axios.get(serverUrl+'/api/districts');
+        setDistrictsData(_districtsData);
 
     };
 

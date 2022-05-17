@@ -6,8 +6,19 @@ import BBLSearch from "./BBLSearch";
 import AreaBlock from "./AreaBlock/AreaBlock";
 import axios from "axios";
 
+
 function DistrictsMap() {
     const [districtsData, setDistrictsData] = useState(districtsGeoJson.features);
+
+    useEffect(async () => {
+        try {
+            const _districtsData = await axios.get(serverUrl+'/api/districts');
+            setDistrictsData(_districtsData);
+        } catch(error) {
+            console.error(error);
+        }
+
+    });
 
     const onEachDistrict = (district, layer) => {
         const districtName = district.properties.ntaname;
@@ -29,18 +40,13 @@ function DistrictsMap() {
 
     };
 
-    useEffect(() => {
-        // const data = districtsGeoJson.features;
-        // setDistrictsData(data);
-    });
-
 
     return (
         <div>
             <div className="items-container">
                 <h1 style={{ textAlign: "center" }}>Map</h1>
                 <BBLSearch/>
-                <AreaBlock districtsData={districtsData} setDistrictsData={setDistrictsData}
+                <AreaBlock setDistrictsData={setDistrictsData}
                 />
             </div>
 

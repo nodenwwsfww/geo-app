@@ -8,9 +8,16 @@ export class Plot extends Model<Plot> {
     @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
     id: number;
 
-    @ApiProperty({description: 'Json value'})
-    @Column({type: DataType.JSON, allowNull: false})
-    jsonValue: string;
+    @ApiProperty({example: '1000000', description: 'Uni bbl number'})
+    @Column({type: DataType.INTEGER, unique: true})
+    bbl: number;
 
+    @ApiProperty({example: '1000000', description: 'Area value'})
+    @Column({type: DataType.INTEGER})
+    area: number;
+
+    @ApiProperty({description: 'Name of the district'})
+    @Column({type: DataType.STRING, allowNull: false})
+    district: string;
 
 }
