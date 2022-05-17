@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { MapContainer, GeoJSON } from 'react-leaflet';
-import districtsGeoJson from '../data/districts.json';
+import jsonGeoMap from '../data/districts.json';
 import '../App.css';
 import BBLSearch from "./BBLSearch";
 import AreaBlock from "./AreaBlock/AreaBlock";
@@ -8,7 +8,7 @@ import axios from "axios";
 
 
 function DistrictsMap() {
-    const [districtsData, setDistrictsData] = useState(districtsGeoJson.features);
+    const [districtsData, setDistrictsData] = useState([]);
 
     useEffect(async () => {
         try {
@@ -21,16 +21,14 @@ function DistrictsMap() {
     });
 
     const onEachDistrict = (district, layer) => {
-        const districtName = district.properties.ntaname;
-        const districtArea = district.properties["shape_area"];
+        const {district, area} = district;
+        const plotsCount = district.plots_count;
 
-
-        const plotsCount = district.properties.plotsCount;
         const popupContent = `
             <Popup>
-                Name: ${districtName}<br/>
+                Name: ${district}<br/>
                 Plots count: ${plotsCount}<br/>
-                Area: ${districtArea}
+                Area: ${area}
             </Popup>
         `;
 
@@ -53,7 +51,7 @@ function DistrictsMap() {
             <MapContainer style={{height: '80vh'}} zoom={11}
                           center={[40.66526788720486, -74.05334472656251]}>
                 <GeoJSON
-                    data={districtsData}
+                    data={jsonGeoMap}
                     onEachFeature={onEachDistrict}
                 />
             </MapContainer>
