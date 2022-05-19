@@ -4,3 +4,8 @@ Stack:
 - Nest.js & MySQL & Python Scripts (for working with json maps)
 
 You can find lastest JSON Data in folder "data"
+
+
+TODO:
+- Write documentation for API on Swagger
+- Write unit tests for Frontend and backend API
