@@ -9,3 +9,4 @@ You can find lastest JSON Data in folder "data"
 TODO:
 - Write documentation for API on Swagger
 - Write unit tests for frontend and backend
+- Rewrite frontend part on typescript
